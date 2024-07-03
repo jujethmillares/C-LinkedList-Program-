@@ -90,14 +90,15 @@ void delete_Item(node *&head, node *&last) {
 
 void display_List(node *current) {
     if (is_Empty(current))
-        cout << "The list is currently empty.\n";
+        cout << "\nThe list is currently empty.\n";
     else {
         cout << "The list contains: \n";
         while(current != NULL) {
-            cout << current->number << endl;
+            cout << "-> " << current->number;
             current = current->next;
         }
     }
+    cout << endl;
 }
 
 
@@ -122,6 +123,7 @@ int main() {
                 break;
             case '3':
                 display_List(head);
+                cout << endl;
                 break;
             case '4':
                 cout << "\nExiting program .... \n";
