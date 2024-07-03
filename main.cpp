@@ -53,7 +53,14 @@ void delete_Item(node *head, node *last) {
 }
 
 void display_List(node *current) {
-
+    if (is_Empty(current))
+        cout << "The list is already empty.\n";
+    else {
+        cout << "The list contains: \n";
+        while(current != NULL)
+            cout << current->number << endl;
+            current = current->next;
+    }
 }
 
 
