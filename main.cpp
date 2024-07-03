@@ -38,7 +38,18 @@ void insert_Item(node *head, node *last, int number) {
 }
 
 void delete_Item(node *head, node *last) {
-
+    if(is_Empty(head))
+        cout << "The list is already empty.\n";
+    else if (head == last) {
+        delete head;
+        head == NULL;
+        last = NULL;
+    }
+    else {
+        node *temp = head;
+        head = head->next;
+        delete temp;
+    }
 }
 
 void display_List(node *current) {
