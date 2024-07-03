@@ -17,7 +17,7 @@ char menu() {
 
 }
 
-void insertFirstItem(node *&head, node *&last, int number) {
+void insert_FirstItem(node *&head, node *&last, int number) {
     node *temp = new node ;
     temp->number = number;
     temp->next = NULL;
@@ -26,7 +26,15 @@ void insertFirstItem(node *&head, node *&last, int number) {
 }
 
 void insert_Item(node *head, node *last, int number) {
-
+    if(is_Empty(head))
+        insert_FirstItem(head, last, number);
+    else {
+        node *temp = new node ;
+        temp->number = number;
+        temp->next = NULL;
+        last->next = temp;
+        last = temp;
+    }
 }
 
 void delete_Item(node *head, node *last) {
