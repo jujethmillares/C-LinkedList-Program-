@@ -7,16 +7,13 @@ struct node {
 };
 
 bool is_Empty(node *head) {
-    if(head == NULL)
-        return true;
-    else
-        return false;
+    return (head == NULL);
 }
 
 char menu() {
     char choice;
 
-    cout << "Menu Options: \n";
+    cout << "MENU OPTIONS \n";
     cout << "1. Add an item. \n";
     cout << "2. Delete an item. \n";
     cout << "3. Display list: \n";
@@ -35,7 +32,7 @@ void insert_FirstItem(node *&head, node *&last, int number) {
     last = temp;
 }
 
-void insert_Item(node *head, node *last, int number) {
+void insert_Item(node *&head, node *&last, int number) {
     if(is_Empty(head))
         insert_FirstItem(head, last, number);
     else {
@@ -47,7 +44,7 @@ void insert_Item(node *head, node *last, int number) {
     }
 }
 
-void delete_Item(node *head, node *last) {
+void delete_Item(node *&head, node *&last) {
     if(is_Empty(head))
         cout << "The list is already empty.\n";
     else if (head == last) {
@@ -64,12 +61,13 @@ void delete_Item(node *head, node *last) {
 
 void display_List(node *current) {
     if (is_Empty(current))
-        cout << "The list is already empty.\n";
+        cout << "The list is currently empty.\n";
     else {
         cout << "The list contains: \n";
-        while(current != NULL)
+        while(current != NULL) {
             cout << current->number << endl;
             current = current->next;
+        }
     }
 }
 
@@ -87,7 +85,7 @@ int main() {
             case '1': 
                 cout << "Please enter a number: \n";
                 cin >> number;
-                insert_FirstItem(head, last, number);
+                insert_Item(head, last, number);
                 break;
             case '2': 
                 delete_Item(head, last);
@@ -95,8 +93,11 @@ int main() {
             case '3':
                 display_List(head);
                 break;
+            case '4':
+                cout << "Exiting program .... \n";
+                break;
             default:
-                cout << "System exit. \n";
+                cout << "Invalid choice. Please try  again. \n";
         }
     }
     while (choice != '4');
