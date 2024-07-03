@@ -14,7 +14,17 @@ bool is_Empty(node *head) {
 }
 
 char menu() {
+    char choice;
 
+    cout << "Menu Options: \n";
+    cout << "1. Add an item. \n";
+    cout << "2. Delete an item. \n";
+    cout << "3. Display list: \n";
+    cout << "4. Exit. \n";
+
+    cin >> choice;
+
+    return choice;
 }
 
 void insert_FirstItem(node *&head, node *&last, int number) {
@@ -67,6 +77,29 @@ void display_List(node *current) {
 int main() {
     node *head = NULL;
     node *last = NULL;
-    
+    char choice;
+    int number;
+
+    do {
+        choice = menu();  
+
+        switch(choice) {
+            case '1': 
+                cout << "Please enter a number: \n";
+                cin >> number;
+                insert_FirstItem(head, last, number);
+                break;
+            case '2': 
+                delete_Item(head, last);
+                break;
+            case '3':
+                display_List(head);
+                break;
+            default:
+                cout << "System exit. \n";
+        }
+    }
+    while (choice != '4');
+
     return 0;
 }
