@@ -13,12 +13,13 @@ bool is_Empty(node *head) {
 char menu() {
     char choice;
 
-    cout << "MENU OPTIONS \n";
-    cout << "1. Add an item. \n";
-    cout << "2. Delete an item. \n";
-    cout << "3. Display list: \n";
-    cout << "4. Exit. \n";
+    cout << "********* MENU OPTIONS ********* \n";
+    cout << "---------1. Add an item.---------\n";
+    cout << "---------2. Delete an item.------\n";
+    cout << "-------- 3. Display list.--------\n";
+    cout << "---------4. Exit.----------------\n";
 
+    cout << "\nPlease enter your choice: ";
     cin >> choice;
 
     return choice;
@@ -45,18 +46,46 @@ void insert_Item(node *&head, node *&last, int number) {
 }
 
 void delete_Item(node *&head, node *&last) {
-    if(is_Empty(head))
+    if(is_Empty(head)) {
         cout << "The list is already empty.\n";
-    else if (head == last) {
-        delete head;
-        head == NULL;
-        last = NULL;
+        return;
     }
-    else {
-        node *temp = head;
+
+    int number;
+    cout << "\nEnter the number to delete: ";
+    cin >> number;
+
+    node *current = head;
+    node *prev = nullptr;
+
+    while (current != nullptr && current->number != number) {
+        prev = current;
+        current = current->next;
+    }
+
+    if (current == nullptr) {
+        cout << "Number not found in the list.\n";
+        cout << endl;
+        return;
+    }
+
+    if (current == head && current == last) {
+        delete current;
+        head = nullptr;
+        last = nullptr;
+    } else if (current == head) {
         head = head->next;
-        delete temp;
+        delete current;
+    } else {
+        prev->next = current->next;
+        if (current == last) {
+            last = prev;
+        }
+        delete current;
     }
+
+    cout << "Number " << number << " has been deleted.\n";
+    cout << endl;
 }
 
 void display_List(node *current) {
@@ -83,9 +112,10 @@ int main() {
 
         switch(choice) {
             case '1': 
-                cout << "Please enter a number: \n";
+                cout << "\nPlease enter a number: ";
                 cin >> number;
                 insert_Item(head, last, number);
+                cout << endl;
                 break;
             case '2': 
                 delete_Item(head, last);
@@ -94,7 +124,7 @@ int main() {
                 display_List(head);
                 break;
             case '4':
-                cout << "Exiting program .... \n";
+                cout << "\nExiting program .... \n";
                 break;
             default:
                 cout << "Invalid choice. Please try  again. \n";
